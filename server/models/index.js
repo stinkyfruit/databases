@@ -16,3 +16,7 @@ module.exports = {
   }
 };
 
+db.connection.connect(function(err) {
+  // connected! (unless `err` is set)
+  console.log('connected!');
+});

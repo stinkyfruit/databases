@@ -18,6 +18,7 @@ CREATE TABLE messages (
 
 
 /*  Execute this file from the command line by typing:
+      //must run from directory and not in SQL
  *    mysql -u root < server/schema.sql
  *  to create the database and the tables.*/
 
