@@ -6,13 +6,16 @@ var mysql = require('mysql');
 
 
 exports.connection = mysql.createConnection({
-  host     : 'http://127.0.0.1/',
+  host     : '127.0.0.1',
   user     : 'root',
   password : '',
   database : 'chat'
 });
 
-// connection.connect(function(err) {
-//   // connected! (unless `err` is set)
-// });
+exports.connection.connect(function(err) {
+  if(err) {
+    console.log(err);
+    console.log("You are not connected");
+  }
+});
 

@@ -24,6 +24,11 @@ app.use("/classes", router);
 // Serve the client files
 app.use(express.static(__dirname + "/../client"));
 
+//this works right here, does not work in models or controllers. why???
+// app.get('/messages', function(req, res) {
+//   res.send('GET request...working');
+// });
+
 // If we are being run directly, run the server.
 if (!module.parent) {
   app.listen(app.get("port"));

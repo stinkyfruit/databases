@@ -15,9 +15,12 @@ CREATE TABLE Messages (
   message varchar(150),
   timestamp timestamp,
   roomname varchar(30),
-  PRIMARY KEY (messageId),
-  FOREIGN KEY (userId) REFERENCES Users(userId)
+  PRIMARY KEY (messageId)
+  -- FOREIGN KEY (userId) REFERENCES Users(userId)
 );
+
+-- SELECT * FROM Messages
+-- JOIN Users ON Users.userId = Messages.userId;
 
 /* Create other tables and define schemas for them here! */
 

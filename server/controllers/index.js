@@ -5,12 +5,21 @@ var bluebird = require('bluebird');
 
 module.exports = {
   messages: {
-    // get: function (req, res) {
-    //   res.send('GET request');
-    // }, // a function which handles a get request for all messages
-    // post: function (req, res) {
-    //   res.send('POST request');
-    // } // a function which handles posting a message to the database
+    get: function (req, res) {
+      //call the get method of the model
+      //model fetches from the database and returns the message obj.
+      //then we send the messages obj as json to the client.
+      models.messages.get(function(err, result) {
+        res.send(result); //express method
+      });
+      
+    }, // a function which handles a get request for all messages
+    post: function (req, res) {
+      //take the messages obj provided and add it to database
+      models.messages.post(req.body);
+      console.log('from controller, post:', req.body)
+      res.send('POST request');
+    } // a function which handles posting a message to the database
   },
 
   users: {
@@ -21,8 +30,8 @@ module.exports = {
 };
 
 
-app.messages.get('/', function (req, res) {
+/* messages.get('/', function (req, res) {
   res.send('root');
 });
 
-app.messages.post();
+app.messages.post();*/
