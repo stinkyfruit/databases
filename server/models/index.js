@@ -15,7 +15,7 @@ module.exports = {
     post: function (req) { // how to construct a query
     //a function which can be used to insert a message into the database
     //adding given message object to messages table
-      //var valueToInsert = req.messageId, req.userId, req.message, req.timestamp, req.roomId
+
     // INSERT into messages (messageId, userId, message, timestamp, roomId)
     //                      values (req.messageId, req.userId, req.message, req.timestamp, req.roomId);
     }
@@ -30,7 +30,14 @@ module.exports = {
         callback(result);
       });
     },
-    post: function () {}
+    post: function (req, callback) {
+      var queryString = 'INSERT INTO Users (username) values(' + req.username +');';
+      db.connection.query(queryString, function(err, result) {
+        console.log("err from model: ", err);
+        console.log("result from model: ", result);
+        callback(result);
+      });
+    }
   }
 };
 

@@ -32,7 +32,10 @@ module.exports = {
       });
     },
     post: function (req, res) {
-      models.users.post(req.body);
+      models.users.post(req.body, function(result) {
+        console.log("results from ctrl: ", result);
+        res.json(result); //express method
+      });
     }
   }
 };
