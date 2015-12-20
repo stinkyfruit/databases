@@ -1,9 +1,5 @@
 var db = require('../db');
 
-db.connection.connect(function() {
-  console.log('connected');
-});
-
 
 
 module.exports = {
@@ -11,7 +7,7 @@ module.exports = {
     get: function (callback) {
       //use mysql commands to select all fields that the user is requesting for a message object
       var queryString = 'SELECT * from Messages LEFT OUTER JOIN Users ON (Messages.userId = Users.userId)';
-      db.query(queryString, function(err, result) {
+      db.connection.query(queryString, function(err, result) {
         callback(result);
       });
       
@@ -27,7 +23,13 @@ module.exports = {
 
   users: {
     // Ditto as above.
-    get: function () {},
+    get: function (callback) {
+      var queryString = 'SELECT * from Users';
+      db.connection.query(queryString, function(err, result) {
+        console.log("result from model: ", result);
+        callback(result);
+      });
+    },
     post: function () {}
   }
 };
