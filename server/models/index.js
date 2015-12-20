@@ -12,12 +12,17 @@ module.exports = {
       });
       
     }, // a function which produces all the messages
-    post: function (req) { // how to construct a query
-    //a function which can be used to insert a message into the database
-    //adding given message object to messages table
-
-    // INSERT into messages (messageId, userId, message, timestamp, roomId)
-    //                      values (req.messageId, req.userId, req.message, req.timestamp, req.roomId);
+    post: function (params, callback) { // how to construct a query
+      //a function which can be used to insert a message into the database
+      //adding given message object to messages table
+      var queryString = 'INSERT into messages (userId, message, timestamp, roomname)'+
+                        ' values ((SELECT userId FROM Users where username = ? limit 1), ?, ?, ?)';
+      // INSERT into messages (messageId, userId, message, timestamp, roomId)
+      //                      values (req.messageId, req.userId, req.message, req.timestamp, req.roomId);
+      db.connection.query(queryString, params, function(err, result) {
+        console.log("err from model: ", err);
+        callback(result);
+      });
     }
   },
 
@@ -30,9 +35,9 @@ module.exports = {
         callback(result);
       });
     },
-    post: function (req, callback) {
-      var queryString = 'INSERT INTO Users (username) values(' + req.username +');';
-      db.connection.query(queryString, function(err, result) {
+    post: function (params, callback) {
+      var queryString = 'INSERT INTO Users (username) values(?)';
+      db.connection.query(queryString, params, function(err, result) {
         console.log("err from model: ", err);
         console.log("result from model: ", result);
         callback(result);

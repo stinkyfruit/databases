@@ -17,9 +17,10 @@ module.exports = {
     }, // a function which handles a get request for all messages
     post: function (req, res) {
       //take the messages obj provided and add it to database
-      models.messages.post(req.body);
-      console.log('from controller, post:', req.body);
-      res.send('POST request');
+      var params = [req.body.username, req.body.message, req.body.roomname, req.body.timestamp]
+      models.messages.post(params, function(result) {
+        res.json(result);
+      });
     } // a function which handles posting a message to the database
   },
 
@@ -32,7 +33,8 @@ module.exports = {
       });
     },
     post: function (req, res) {
-      models.users.post(req.body, function(result) {
+      var params = [req.body.username];
+      models.users.post(params, function(result) {
         console.log("results from ctrl: ", result);
         res.json(result); //express method
       });
