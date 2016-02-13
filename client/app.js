@@ -3,7 +3,8 @@ $(function() {
   app = {
 //TODO: The current 'addFriend' function just adds the class 'friend'
 //to all messages sent by the user
-    server: 'https://127.0.0.1:3000/classes',
+    // server: 'https://127.0.0.1:3000/classes',
+    server: 'http://127.0.0.1:3000/classes/messages',
     username: 'anonymous',
     roomname: 'lobby',
     lastMessageId: 0,
@@ -30,7 +31,7 @@ $(function() {
       app.fetch(false);
 
       // Poll for new messages
-      setInterval(app.fetch, 3000);
+      //setInterval(app.fetch, 3000);
     },
     send: function(data) {
       app.startSpinner();
